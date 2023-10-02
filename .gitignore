@@ -1,3 +1,9 @@
 # Garbage Files
 .DS_Store
 */.DS_Store
+
+# Unfinished Subdirectories
+P1-Intro-to-JS/
+P2-Intro-to-React/
+P4-Intro-to-Flask/
+P5-Capstone-Engineering/
