@@ -15,7 +15,7 @@ This is the single-source-of-truth for information, tips/tricks, documentation, 
 
 You'll find the following types of resources throughout this repo:
 - Markdown Compilations of In-Class Q&A Information
-- Stylized Markdown Guides that Reference Other Resources (e.g. Daniel's CodeTours)
+- Stylized Markdown Guides that Reference Other Resources
 - Glossary Terms for Important Terms and Concepts
 - Updated Tutorialized Walkthroughs for Practice Code Challenges and Other Programming Projects
 
