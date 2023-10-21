@@ -28,7 +28,7 @@ To get access to this repository version in an optimal way, you're encouraged to
 
 ## Credits
 
-The **SE-NYC-091123 Vault** is created and maintained by **Aakash "Kash" Sudhakar** and **Sakib Rasul**. (2023). 
+The **SE-NYC-091123 Vault** is created and maintained by **Aakash "Kash" Sudhakar**, **Sakib Rasul**, **Sean O'Grady**, and **Tymur Bondar**. (2023). 
 
 ## Dogs
 
