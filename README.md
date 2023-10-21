@@ -29,3 +29,7 @@ To get access to this repository version in an optimal way, you're encouraged to
 ## Credits
 
 The **SE-NYC-091123 Vault** is created and maintained by **Aakash "Kash" Sudhakar** and **Sakib Rasul**. (2023). 
+
+## Dogs
+
+![Ginny](https://media.discordapp.net/attachments/335080098715795456/1164977286311850014/IMG_20231001_220316.jpg?ex=65452ca5&is=6532b7a5&hm=a0f27b76d90fafdc7c66547194979c20c31c80f7e39154a4f666828a3e060c53&=&width=498&height=748)
