@@ -7,3 +7,9 @@ P1-Intro-to-JS/
 P2-Intro-to-React/
 P4-Intro-to-Flask/
 P5-Capstone-Engineering/
+
+# Python Configuration Materials
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+.mypy_cache/
+*/.mypy_cache/
