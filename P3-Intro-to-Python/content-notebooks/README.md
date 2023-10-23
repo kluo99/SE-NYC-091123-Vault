@@ -19,13 +19,13 @@ Additionally, many notebooks double as slides and tutorials that you can access 
 ## Notebook Materials for Phase 3 📓
 
 - [**Notebook #0: Python Fundamentals for JavaScript Developers**](./00-Python-Fundamentals.ipynb)
-- ~~[**Notebook #1: Basic Patterns in Python**](./01-Basic-Patterns-In-Python.ipynb)~~
-- ~~[**Notebook #2: Intermediate Patterns in Python**](./02-Intermediate-Patterns-In-Python.ipynb)~~
-- ~~[**Notebook #3: Design Thinking for Programmers**](./03-Design-Thinking-For-Programmers.ipynb)~~
-- ~~[**Notebook #4: Introduction to Object-Oriented Programming**](./04-Intro-To-OOP.ipynb)~~
-- ~~[**Notebook #5: Exploring Object-Oriented Programming Design**](./05-Exploring-OOPD.ipynb)~~
-- ~~[**Notebook #6: The Python Development Landscape**](./06-Python-Dev-Landscape.ipynb)~~
-- ~~[**Notebook #7: Advanced Patterns in Python**](./07-Advanced-Patterns-In-Python.ipynb)~~
+- [**Notebook #1: Basic Patterns in Python**](./01-Basic-Patterns-In-Python.ipynb)
+- [**Notebook #2: Intermediate Patterns in Python**](./02-Intermediate-Patterns-In-Python.ipynb)
+- [**Notebook #3: Design Thinking for Programmers**](./03-Design-Thinking-For-Programmers.ipynb)
+- ~~**Notebook #4: Introduction to Object-Oriented Programming**~~
+- ~~**Notebook #5: Exploring Object-Oriented Programming Design**~~
+- ~~**Notebook #6: The Python Development Landscape**~~
+- ~~**Notebook #7: Advanced Patterns in Python**~~
 
 ## Credits
 
