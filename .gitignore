@@ -13,3 +13,7 @@ P5-Capstone-Engineering/
 */.ipynb_checkpoints/
 .mypy_cache/
 */.mypy_cache/
+
+# Media Assets
+assets/
+*/assets/
