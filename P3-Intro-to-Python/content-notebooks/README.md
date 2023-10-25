@@ -22,10 +22,11 @@ Additionally, many notebooks double as slides and tutorials that you can access 
 - [**Notebook #1: Basic Patterns in Python**](./01-Basic-Patterns-In-Python.ipynb)
 - [**Notebook #2: Intermediate Patterns in Python**](./02-Intermediate-Patterns-In-Python.ipynb)
 - [**Notebook #3: Design Thinking for Programmers**](./03-Design-Thinking-For-Programmers.ipynb)
-- [**Notebook #4: Introduction to Object-Oriented Programming**](./04-Intro-To-OOP.ipynb) (_In Development_)
-- [**Notebook #5: Exploring Object-Oriented Programming Design**](./05-Exploring-OOPD.ipynb) (_In Development_)
-- ~~**Notebook #6: The Python Development Landscape**~~
-- ~~**Notebook #7: Advanced Patterns in Python**~~
+- [**Notebook #4: Introduction to Object-Oriented Programming**](./04-Intro-To-OOP.ipynb)
+- [**Notebook #5: Exploring Object-Oriented Programming Design**](./05-Exploring-OOPD.ipynb)
+- [**Notebook #6: The Python Development Landscape**](./06-Python-Dev-Landscape.ipynb) (_In Development_)
+- [**Notebook #7: Advanced Patterns in Python**](./07-Advanced-Patterns-In-Python.ipynb) (_In Development_)
+- [**Notebook #8: Mastery Patterns in Python**](./08-Mastery-Patterns-In-Python.ipynb) (_In Development_)
 
 ## Credits
 
