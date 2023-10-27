@@ -80,25 +80,25 @@ build out any helper methods if needed.
     - `raise Exception` if setter fails
       
 
-#### Coffee
+#### Pizza
 
 - 
   ```python
   def __init__(self, name)
   ```
-  - Coffees should be initialized with a name, as a string
+  - Pizzas should be initialized with a name, as a string
 - 
   ```python
   @property
   def name(self)
   ```
-    - Returns the coffee's name
+    - Returns the pizza's name
 - 
   ```python
   @name.setter
   def name(self, name)
   ```
-    - Should not be able to change after the coffee is created
+    - Should not be able to change after the pizza is created
       - _hint: `hasattr()`_
     - `raise Exception` if setter fails
 
@@ -106,9 +106,9 @@ build out any helper methods if needed.
 
 - 
     ```python
-    def __init__(self, customer, coffee, price)
+    def __init__(self, customer, pizza, price)
     ```
-  - Orders should be initialized with a customer, coffee, and a price (a number)
+  - Orders should be initialized with a customer, pizza, and a price (a number)
 - 
   ```python
   @property
@@ -138,36 +138,36 @@ build out any helper methods if needed.
 - 
   ```python
   @property
-  def coffee(self)
+  def pizza(self)
   ```
-    - Returns the coffee object for that order
+    - Returns the pizza object for that order
 - 
   ```python
   @coffee.setter
-  def coffee(self, coffee)
+  def pizza(self, pizza)
   ```
-    - The argument `coffee` must be of type `Coffee` 
+    - The argument `pizza` must be of type `Pizza` 
     - `raise Exception` if setter fails
 
 ### Object Relationship Methods
 
 
-#### Coffee
+#### Pizza
 
 - 
   ```python
   def orders(new_order=None)
   ```
-  - Adds `new_order` to `Coffee`'s orders
-  - Returns a list of all orders for that coffee
+  - Adds `new_order` to `Pizza`'s orders
+  - Returns a list of all orders for that pizza
   - orders must be of type `Order`
   - _Will be called from `Order.__init__`_
 - 
   ```python
   def customers(new_customer=None)
   ```
-  - Adds new customers to coffee
-  - Returns a list of all **unique** customers who have ordered a particular coffee (i.e. the list will not contain the same customer more than once).
+  - Adds new customers to pizza
+  - Returns a list of all **unique** customers who have ordered a particular pizza (i.e. the list will not contain the same customer more than once).
     - The list must only contain objects of type `Customer`
   - _Will be called from `Order.__init__`_
 
@@ -183,11 +183,11 @@ build out any helper methods if needed.
   - _Will be called from `Order.__init__`_
 - 
   ```python
-  def coffees(new_coffee=None)
+  def pizzas(new_pizza=None)
   ```
-  - Adds new coffees to customer
-  - Returns a list of all **unique** coffees a customer has ordered (i.e. the list will not contain the same coffee more than once).
-    - The list must only contain objects of type `Coffee`
+  - Adds new pizzas to customer
+  - Returns a list of all **unique** pizzas a customer has ordered (i.e. the list will not contain the same pizza more than once).
+    - The list must only contain objects of type `Pizza`
   - _Will be called from `Order.__init__`_
 
 ### Aggregate and Association Methods
@@ -199,11 +199,11 @@ build out any helper methods if needed.
   ```python
   def num_orders()
   ```
-  - Returns the total number of times that coffee has been ordered
+  - Returns the total number of times that pizza has been ordered
 - 
   ```python
   def average_price()
   ```
-  - Returns the average price for a coffee based on its orders
+  - Returns the average price for a pizza based on its orders
   - Reminder: you can calculate the average by adding up all the orders prices and
     dividing by the number of orders
