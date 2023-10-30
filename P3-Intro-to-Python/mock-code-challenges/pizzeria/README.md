@@ -22,14 +22,28 @@ start coding_. Remember to identify a single source of truth for your data.
 
 ## Instructions
 
-To get started, run `pipenv install` while inside of this directory.
+**To Get Started!** 
+
+Run `pipenv install` while inside of this directory.
+
+**Starting Out!** 
 
 Build out all of the methods listed in the deliverables. The methods are listed
 in a suggested order, but you can feel free to tackle the ones you think are
 easiest. Be careful: some of the later methods rely on earlier ones.
 
-**Remember!** This code challenge has tests to help you check your work. You
+**Testing Your Code!** 
+
+This code challenge has tests to help you check your work. You
 can run `pytest` to make sure your code is functional before submitting.
+
+**Before you submit!** 
+
+Save and run your code to verify that it works as you
+expect. If you have any methods that are not working yet, feel free to leave
+comments describing your progress.
+
+## Guidelines
 
 We've provided you with a tool that you can use to test your code. To use it,
 run `python debug.py` from the command line. This will start a `ipdb` session
@@ -45,10 +59,6 @@ Similarly, messy code that works is better than clean code that doesn't. First,
 prioritize getting things working. Then, if there is time at the end, refactor
 your code to adhere to best practices. When you encounter duplicated logic,
 extract it into a shared helper method.
-
-**Before you submit!** Save and run your code to verify that it works as you
-expect. If you have any methods that are not working yet, feel free to leave
-comments describing your progress.
 
 ## Deliverables
 
@@ -156,7 +166,7 @@ build out any helper methods if needed.
 
 - 
   ```python
-  def orders(new_order=None)
+  def access_current_orders(new_order=None)
   ```
   - Adds `new_order` to `Pizza`'s orders
   - Returns a list of all orders for that pizza
@@ -164,7 +174,7 @@ build out any helper methods if needed.
   - _Will be called from `Order.__init__`_
 - 
   ```python
-  def customers(new_customer=None)
+  def access_current_customers(new_customer=None)
   ```
   - Adds new customers to pizza
   - Returns a list of all **unique** customers who have ordered a particular pizza (i.e. the list will not contain the same customer more than once).
@@ -175,7 +185,7 @@ build out any helper methods if needed.
 
 - 
   ```python
-  def orders(new_order=None)
+  def access_current_orders(new_order=None)
   ```
   - Adds new orders to customer
   - Returns a list of all orders a customer has ordered
@@ -183,7 +193,7 @@ build out any helper methods if needed.
   - _Will be called from `Order.__init__`_
 - 
   ```python
-  def pizzas(new_pizza=None)
+  def access_current_pizzas(new_pizza=None)
   ```
   - Adds new pizzas to customer
   - Returns a list of all **unique** pizzas a customer has ordered (i.e. the list will not contain the same pizza more than once).
@@ -197,13 +207,14 @@ build out any helper methods if needed.
 
 - 
   ```python
-  def num_orders()
+  def calculate_total_number_of_orders()
   ```
   - Returns the total number of times that pizza has been ordered
 - 
   ```python
-  def average_price()
+  def calculate_average_price_across_all_orders()
   ```
   - Returns the average price for a pizza based on its orders
-  - Reminder: you can calculate the average by adding up all the orders prices and
-    dividing by the number of orders
+  - Reminder: you can calculate the average by adding up all the order's prices and
+    dividing by the total number of orders
+    - _hint:_ Might we have a method for quickly calculating the total number of orders?
