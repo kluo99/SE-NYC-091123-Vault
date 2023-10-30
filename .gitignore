@@ -13,3 +13,11 @@ P5-Capstone-Engineering/
 */.ipynb_checkpoints/
 .mypy_cache/
 */.mypy_cache/
+
+# Python Environment Configurations
+Pipfile.lock
+*/Pipfile.lock
+__pycache__/
+*/__pycache__/
+.pytest_cache/
+*/.pytest_cache/
