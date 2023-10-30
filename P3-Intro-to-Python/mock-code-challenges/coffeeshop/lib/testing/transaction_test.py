@@ -46,8 +46,8 @@ class TestTransactions:
         transaction_1 = Transaction(customer, coffee_1, 2)
         transaction_2 = Transaction(customer, coffee_2, 5)
 
-        assert (transaction_1.pizza == coffee_1)
-        assert (transaction_2.pizza == coffee_2)
+        assert (transaction_1.coffee == coffee_1)
+        assert (transaction_2.coffee == coffee_2)
 
     def test_coffee_of_type_coffee(self):
         ''' Tests that an transaction's coffee is of type `Coffee`. '''
