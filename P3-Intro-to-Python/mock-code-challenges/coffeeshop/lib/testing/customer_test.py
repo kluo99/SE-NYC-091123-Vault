@@ -85,3 +85,37 @@ class TestCustomer:
 
         assert (len(set(customer.access_current_coffees())) == len(customer.access_current_coffees()))
         assert (len(customer.access_current_coffees()) == 2)
+
+    def test_can_place_order(self):
+        ''' Tests that a customer can place an order using a string name and numerical price. '''
+        coffee = Coffee("Espresso")
+        customer = Customer('Steve')
+        transaction = customer.place_order("Espresso", 3)
+        assert (coffee in customer.access_current_coffees())
+        assert (transaction.price == 3)
+
+    def test_get_total_money(self):
+        ''' Tests that a customer can add up prices across all orders. '''
+        coffee_1 = Coffee("Cappuccino")
+        coffee_2 = Coffee("Macchiatto")
+
+        customer = Customer('Steve')
+        transaction_1 = Transaction(customer, coffee_1, 2)
+        transaction_2 = Transaction(customer, coffee_1, 2)
+        transaction_3 = Transaction(customer, coffee_2, 5)
+        assert (customer.calculate_total_money_spent() == 9)
+
+    def test_get_coffees_in_range(self):
+        ''' Tests that a customer can get all coffees that fall within provided price range. '''
+        coffee_1 = Coffee("Cappuccino")
+        coffee_2 = Coffee("Caramel Macchiatto")
+        coffee_3 = Coffee("Premium Ultra Dubai Espresso")
+
+        customer = Customer('Steve')
+        transaction_1 = Transaction(customer, coffee_1, 3)
+        transaction_2 = Transaction(customer, coffee_2, 6)
+        transaction_3 = Transaction(customer, coffee_3, 25)
+
+        assert (coffee_1 in customer.retrieve_coffees_within_price_range(1, 10))
+        assert (coffee_2 in customer.retrieve_coffees_within_price_range(1, 10))
+        assert (coffee_3 not in customer.retrieve_coffees_within_price_range(1, 10))

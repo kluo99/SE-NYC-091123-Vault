@@ -32,7 +32,7 @@ class Coffee:
         if CUSTOMER_IS_UNIQUE and CUSTOMER_TYPE_IS_VALID:
             self.customers.append(new_customer)
         return self.customers
-
+    
     def calculate_total_number_of_transactions(self):
         return len(self.transactions)
     
