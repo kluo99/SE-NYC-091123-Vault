@@ -211,6 +211,7 @@ build out any helper methods if needed.
   ```
   - Given the name of a coffee (as a string) and a price (as an integer), creates a new transaction and associates it with that customer and coffee
     - _hint: Remember to import both objects!_
+  - Returns the new transaction as an object instance
 - 
   ```python
   def calculate_total_money_spent()
