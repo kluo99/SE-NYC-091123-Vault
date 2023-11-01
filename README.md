@@ -34,3 +34,6 @@ The **SE-NYC-091123 Vault** is created and maintained by **Aakash "Kash" Sudhaka
 
 <img src="./assets/ginny.jpeg" width=100 height=150 />
 <img src="./assets/bablu.jpeg" width=120 height=150 />
+<img src="./assets/lucky.jpg" width=120 height=150 />
+<img src="./assets/lychee.jpeg" width=120 height=150 />
+<img src="./assets/mango.jpeg" width=120 height=150 />
