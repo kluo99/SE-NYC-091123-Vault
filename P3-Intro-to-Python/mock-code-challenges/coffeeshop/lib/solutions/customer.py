@@ -37,10 +37,14 @@ class Customer:
     def place_order(self, name_of_coffee, price):
         from classes.coffee import Coffee
         from classes.transaction import Transaction
-        return Transaction(Coffee(name_of_coffee), price)
+        return Transaction(self, Coffee(name_of_coffee), price)
 
     def calculate_total_money_spent(self):
         return sum(transaction.price for transaction in self.transactions)
     
     def retrieve_coffees_within_price_range(self, min_price=0, max_price=999):
-        return list(filter(lambda coffee: min_price <= coffee.price <= max_price, self.coffees))
+        filtered_coffees = []
+        for transaction in self.transactions:
+            if min_price <= transaction.price <= max_price:
+                filtered_coffees.append(transaction.coffee)
+        return filtered_coffees
