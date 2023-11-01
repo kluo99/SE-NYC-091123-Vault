@@ -130,7 +130,7 @@ build out any helper methods if needed.
   @price.setter
   def price(self, price)
   ```
-    - Price must be at least 1 and no greater than 10
+    - Price must be at least 1 and no greater than 50
     - `raise Exception` if setter fails
 - 
   ```python

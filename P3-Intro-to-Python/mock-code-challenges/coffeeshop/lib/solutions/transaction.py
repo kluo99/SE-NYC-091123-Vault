@@ -9,10 +9,10 @@ class Transaction:
         Transaction.counter += 1
         Transaction.catalog.append(self)
 
-        coffee.access_current_orders(self)
+        coffee.access_current_transactions(self)
         coffee.access_current_customers(customer)
         
-        customer.access_current_orders(self)
+        customer.access_current_transactions(self)
         customer.access_current_coffees(coffee)
 
     def __repr__(self):
@@ -25,11 +25,11 @@ class Transaction:
     @price.setter
     def price(self, price):
         PRICE_IS_NUMERICAL = (type(price) in (int, float))
-        PRICE_WITHIN_ACCEPTABLE_RANGE = (0.25 <= price <= 20)
+        PRICE_WITHIN_ACCEPTABLE_RANGE = (1 <= price <= 50)
         if PRICE_IS_NUMERICAL and PRICE_WITHIN_ACCEPTABLE_RANGE:
             self._price = price
         else:
-            raise Exception("Unacceptable data format for `Order.price`!")
+            raise Exception("Unacceptable data format for `Transaction.price`!")
 
     @property
     def customer(self):
@@ -42,7 +42,7 @@ class Transaction:
         if CUSTOMER_TYPE_IS_VALID:
             self._customer = customer
         else:
-            raise Exception("Unacceptable data type for `Order.customer`!")
+            raise Exception("Unacceptable data type for `Transaction.customer`!")
 
     @property
     def coffee(self):
@@ -55,4 +55,4 @@ class Transaction:
         if COFFEE_TYPE_IS_VALID:
             self._coffee = coffee
         else:
-            raise Exception("Unacceptable data type for `Order.coffee`!")
+            raise Exception("Unacceptable data type for `Transaction.coffee`!")

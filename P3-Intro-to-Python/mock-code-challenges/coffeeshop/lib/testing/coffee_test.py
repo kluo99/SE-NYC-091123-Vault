@@ -24,8 +24,8 @@ class TestCoffee:
         with pytest.raises(Exception):
             coffee.name = "Espresso"
 
-    def test_has_many_orders(self):
-        ''' Tests that a coffee can have many orders. '''
+    def test_has_many_transactions(self):
+        ''' Tests that a coffee can have many transactions. '''
         coffee_1 = Coffee("Espresso")
         coffee_2 = Coffee("Cappuccino")
         customer = Customer('Steve')
