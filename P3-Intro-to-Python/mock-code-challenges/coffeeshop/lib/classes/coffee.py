@@ -2,6 +2,9 @@ class Coffee:
     def __init__(self, name):
         self.name = name
 
+    def __repr__(self):
+        return f"Coffee: {self.name}"
+
     def access_current_transactions(self, new_transaction=None):
         from classes.transaction import Transaction
         pass

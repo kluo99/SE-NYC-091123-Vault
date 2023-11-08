@@ -4,6 +4,9 @@ class Customer:
         self.coffees = []
         self.transactions = []
 
+    def __repr__(self):
+        return f"Customer: {self.name}"
+
     @property
     def name(self):
         return self._name
