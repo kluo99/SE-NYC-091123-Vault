@@ -204,7 +204,6 @@ build out any helper methods if needed.
 
 #### Customer
 
-
 -
   ```python
   def place_order(name_of_coffee, price)
