@@ -28,13 +28,13 @@ To get access to this repository version in an optimal way, you're encouraged to
 
 ## Credits
 
-The **SE-NYC-091123 Vault** is created and maintained by **Aakash "Kash" Sudhakar**, **Sakib Rasul**, **Sean O'Grady**, and **Tymur Bondar**. (2023). 
+The **SE-NYC-091123 Vault** is created and maintained by **Aakash "Kash" Sudhakar**, **Sakib Rasul**, **Sean O'Grady**, **Tymur Bondar**, **Sophie Gamer**, and **Dennis Shin**. (2023). 
 
 ## Pets
 
 <img src="./assets/ginny.jpeg" width=100 height=150 />
 <img src="./assets/bablu.jpeg" width=120 height=150 />
-<img src="https://ibb.co/cThT3Mj" width = 100 height=150/>
+<img src="https://i.ibb.co/88g8sTH/IMG-6392-1.jpg" width=100 height=150/>
 <img src="./assets/lucky.JPG" width=120 height=150 />
 <img src="./assets/lychee.jpeg" width=120 height=150 />
 <img src="./assets/mango.jpeg" width=120 height=150 />
