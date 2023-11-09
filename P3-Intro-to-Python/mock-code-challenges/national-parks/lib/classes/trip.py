@@ -1,12 +1,6 @@
 class Trip:
     counter, catalog = 0, []
     def __init__(self, visitor, national_park, start_date=None, end_date=None):
-        self.visitor = visitor
-        self.national_park = national_park
-
-        Trip.counter += 1
-        Trip.catalog.append(self)
-
         # DO NOT EDIT – Datetime Initialization Script –––––––––––– #
         NO_START_DATE_PROVIDED = (start_date is None)               #
         NO_END_DATE_PROVIDED = (end_date is None)                   #
@@ -19,6 +13,12 @@ class Trip:
         else:                                                       #
             self.start_date, self.end_date = start_date, end_date   #
         # DO NOT EDIT – Datetime Initialization Script –––––––––––– #
+        
+        self.visitor = visitor
+        self.national_park = national_park
+
+        Trip.counter += 1
+        Trip.catalog.append(self)
 
     def __repr__(self):
         from datetime import datetime
