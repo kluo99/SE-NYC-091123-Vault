@@ -5,11 +5,11 @@
 # Unfinished Subdirectories
 P1-Intro-to-JS/
 P2-Intro-to-React/
-P4-Intro-to-Flask/
 P5-Capstone-Engineering/
 
 # Unfinished Subdirectory Materials: Supplements
 P3-Intro-to-Python/supplementary-content/
+P4-Intro-to-Flask/supplementary-content/
 
 # Python Configuration Materials
 .ipynb_checkpoints/
