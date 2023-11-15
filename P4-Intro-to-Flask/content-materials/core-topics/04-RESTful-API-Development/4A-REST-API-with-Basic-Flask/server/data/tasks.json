@@ -10,7 +10,7 @@
             "id": 2,
             "title": "Learn Python",
             "description": "Need to find a good Python tutorial for web development",
-            "done": true
+            "done": false
         },
         {
             "id": 3,
