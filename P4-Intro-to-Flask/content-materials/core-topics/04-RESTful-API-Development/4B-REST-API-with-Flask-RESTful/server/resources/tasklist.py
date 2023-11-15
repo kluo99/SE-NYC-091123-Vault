@@ -1,6 +1,10 @@
 from json import loads, dump
 from flask_restful import Resource, reqparse, fields, marshal
 
+# NOTE: Relative path to data may influence how Python can handle this script.
+#       Ensure that Flask/Python is executed from an appropriate location.
+PATH_TO_DATASET = "data/tasks.json"
+
 TASK_FIELDS = {
     "id": fields.Integer,
     "title": fields.String,
@@ -11,7 +15,7 @@ TASK_FIELDS = {
 
 class TaskListAPI(Resource):
     def __init__(self):
-        with open("server/data/tasks.json", "r") as fr:
+        with open(PATH_TO_DATASET, "r") as fr:
             self.tasks = loads(fr.read())["tasks"]
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument("title",
@@ -30,7 +34,7 @@ class TaskListAPI(Resource):
     
     def post(self):
         args = self.reqparse.parse_args()
-        with open("server/data/tasks.json", "w") as stream:
+        with open(PATH_TO_DATASET, "w") as stream:
             task = {
                 "id": self.tasks[-1]["id"] + 1 if len(self.tasks) > 0 else 1,
                 "title": args["title"],
