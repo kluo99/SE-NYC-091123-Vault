@@ -2,6 +2,10 @@ from json import loads, dump
 from flask import abort
 from flask_restful import Resource, reqparse, fields, marshal
 
+# NOTE: Relative path to data may influence how Python can handle this script.
+#       Ensure that Flask/Python is executed from an appropriate location.
+PATH_TO_DATASET = "data/tasks.json"
+
 TASK_FIELDS = {
     "id": fields.Integer,
     "title": fields.String,
@@ -12,7 +16,7 @@ TASK_FIELDS = {
 
 class TaskAPI(Resource):
     def __init__(self):
-        with open("server/data/tasks.json", "r") as fr:
+        with open(PATH_TO_DATASET, "r") as fr:
             self.tasks = loads(fr.read())["tasks"]
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument("title", type=str, location="json")
@@ -32,7 +36,7 @@ class TaskAPI(Resource):
             abort(404)
         task = task[0]
         args = self.reqparse.parse_args()
-        with open("server/data/tasks.json", "w") as stream:
+        with open(PATH_TO_DATASET, "w") as stream:
             for key, value in args.items():
                 if value is not None:
                     if value.lower() == "true":
@@ -48,7 +52,7 @@ class TaskAPI(Resource):
         task = [task for task in self.tasks if task["id"] == int(id)]
         if len(task) == 0:
             abort(404)
-        with open("server/data/tasks.json", "w") as stream:
+        with open(PATH_TO_DATASET, "w") as stream:
             self.tasks.remove(task[0])
             dump({"tasks": self.tasks}, stream, indent=4)
         return task[0], 201
