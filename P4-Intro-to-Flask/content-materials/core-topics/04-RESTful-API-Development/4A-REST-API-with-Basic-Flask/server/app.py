@@ -78,7 +78,7 @@ Test with the following command:
 def create_task():
     if not request.json or not "title" in request.json:
         abort(400)
-    with open("server/data/tasks.json", "w") as stream:
+    with open(PATH_TO_DATASET, "w") as stream:
         task = {
             "id": tasks[-1]["id"] + 1,
             "title": request.json["title"],
@@ -107,7 +107,7 @@ def update_task_by_task_id(task_id):
         abort(400)
     if "done" in request.json and type(request.json["done"]) is not bool:
         abort(400)
-    with open("server/data/tasks.json", "w") as stream:
+    with open(PATH_TO_DATASET, "w") as stream:
         task[0]["title"] = request.json.get("title", task[0]["title"])
         task[0]["description"] = request.json.get("description", task[0]["description"])
         task[0]["done"] = request.json.get("done", task[0]["done"])
@@ -124,7 +124,7 @@ def delete_task_by_task_id(task_id):
     task = [task for task in tasks if task["id"] == int(task_id)]
     if len(task) == 0:
         abort(404)
-    with open("server/data/tasks.json", "w") as stream:
+    with open(PATH_TO_DATASET, "w") as stream:
         tasks.remove(task[0])
         dump({"tasks": tasks}, stream, indent=4)
     return jsonify(task[0]), 201
