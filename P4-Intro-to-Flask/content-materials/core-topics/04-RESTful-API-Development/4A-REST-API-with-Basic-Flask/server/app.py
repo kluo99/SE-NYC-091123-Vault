@@ -1,13 +1,44 @@
+"""
+FILENAME:       app.py
+TITLE:          Basic Flask REST API.
+AUTHOR:         Aakash 'Kash' Sudhakar
+DESCRIPTION:    A tutorial mini-project on setting up basic backend servers
+                that handle RESTful API calls via HTTP requests. 
+USAGE:          Run in CLI with command `python(3) app.py`, `flask run`, or
+                `flask --app app.py --debug run`. 
+"""
+
+################################################################################
+############## IMPORT STATEMENTS FOR BACKEND DEVELOPMENT IN FLASK ##############
+################################################################################
+
+
 from json import loads, dump
 from flask import Flask, jsonify, request, abort, make_response
 
-with open("server/data/tasks.json", "r") as fr:
+
+################################################################################
+######### LOADING DATA AND SETTING UP FLASK SERVER FOR API DEVELOPMENT #########
+################################################################################
+
+
+# NOTE: Relative path to data may influence how Python can handle this script.
+#       Ensure that Flask/Python is executed from an appropriate location.
+PATH_TO_DATASET = "data/tasks.json"
+
+with open(PATH_TO_DATASET, "r") as fr:
     tasks = loads(fr.read())["tasks"]
 
 app = Flask(__name__)
 
+
+################################################################################
+####################### FLASK API DEVELOPMENT AND TESTING ######################
+################################################################################
+
+
 """
-Test with the following command:
+Test with the following command(s):
     curl -i http://localhost:{PORT}/
 """
 @app.route("/", methods=["GET"])
@@ -102,6 +133,12 @@ Test with the following command:
 @app.errorhandler(404)
 def not_found(error):
     return make_response(jsonify({"error": "Not Found!"}), 404)
+
+
+################################################################################
+####################### LAUNCHING SERVER-SIDE APPLICATION ######################
+################################################################################
+
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True)
