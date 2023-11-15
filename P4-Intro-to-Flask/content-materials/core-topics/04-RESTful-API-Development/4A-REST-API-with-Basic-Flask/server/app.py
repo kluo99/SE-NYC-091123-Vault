@@ -1,5 +1,5 @@
 from json import loads, dump
-from flask import Flask, jsonify, request, abort, make_response, url_for
+from flask import Flask, jsonify, request, abort, make_response
 
 with open("server/data/tasks.json", "r") as fr:
     tasks = loads(fr.read())["tasks"]
