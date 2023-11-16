@@ -34,3 +34,9 @@ node_modules/
 # SQL Database Files
 *.db
 */*.db
+
+# SQL Database Configuration Materials
+migrations/
+*/migrations/
+instance/
+*/instance/
