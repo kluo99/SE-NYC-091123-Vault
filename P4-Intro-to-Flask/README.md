@@ -30,8 +30,8 @@ Content in Phase 4 has been split into two major units: **core topical (primary)
 - [**CORE TOPICS #2: Introduction to Advanced Patterns in Python**](content-materials/core-topics/02-Advanced-Python-Patterns/Advanced-Patterns-In-Python.ipynb)
 - [**CORE TOPICS #3: Flask for Basic Server Development**](content-materials/core-topics/03-Basic-Server-Development/)
 - [**CORE TOPICS #4: RESTful API Design and Development**](content-materials/core-topics/04-RESTful-API-Development/)
-- ~~**CORE TOPICS #5: Developing Web Apps with Relational Databases**~~ _(In Development.)_
-- ~~**CORE TOPICS #6: Flask and SQL for Database Engineering**~~ _(In Development.)_
+- [**CORE TOPICS #5: Developing Web Apps with Relational Databases**](content-materials/core-topics/05-Web-App-Relational-Databases/)
+- [**CORE TOPICS #6: Flask and SQL for Database Engineering**](content-materials/core-topics/06-Flask-SQL-Database-Engineering/)
 - ~~**CORE TOPICS #7: Full-Stack Web Apps and Client-Server Communication**~~ _(In Development.)_
 - ~~**CORE TOPICS #8: Full-Stack Microservice Development**~~ _(In Development.)_
 
