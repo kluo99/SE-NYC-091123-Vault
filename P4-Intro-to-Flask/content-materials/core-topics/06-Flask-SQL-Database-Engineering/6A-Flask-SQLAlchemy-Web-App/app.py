@@ -1,22 +1,69 @@
+"""
+FILENAME:       `app.py`
+TITLE:          Flask REST API integrated with SQLite3 and SQLAlchemy.
+AUTHOR:         Aakash 'Kash' Sudhakar
+DESCRIPTION:    A tutorial mini-project on setting up backend servers
+                that handle RESTful API calls via HTTP requests and store,
+                modify, and query data via tabular SQLite3 databases extended
+                with SQL-Alchemy for additional functionalities, validations,
+                security, and authentication.
+USAGE:          Run in CLI with command `python(3) app.py`, `flask run`, or
+                `flask --app app.py --debug run`. 
+"""
+
+
+################################################################################
+### IMPORTATIONS AND INITIALIZATIONS FOR DEVELOPING FLASK-SQLALCHEMY SERVERS ###
+################################################################################
+
+
 from flask import Flask, request, make_response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, migrate
 import os
 
+# Import Database Prototype and Defined Model Architecture(s).
 from models import db, Mob
 
+
+################################################################################
+##################### FLASK SERVER SETUP AND CONFIGURATIONS ####################
+################################################################################
+
+
+# Establish Correct Path to SQL Database Source.
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DATABASE = os.environ.get("DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'mobs.db')}")
 
+# Create Flask Application Instance and Configure with SQLAlchemy.
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.json.compact = False
 app.debug = True
 
+
+################################################################################
+##################### DATABASE MIGRATION AND INSTANTIATION #####################
+################################################################################
+
+
+# Migrate Database to Most Recent Application Instance.
 migrate = Migrate(app, db)
 
+# Reinstantiate Application.
 db.init_app(app)
+
+
+################################################################################
+####################### FLASK API DEVELOPMENT AND TESTING ######################
+################################################################################
+
+
+# NOTE: For all API routes, you can use either `http://localhost` or 
+#       `http://AAA.B.C.D`, where the latter option's letters are replaced by 
+#       the actual IP address from which your application loads.
+
 
 # GET Request to Access Root of API.
 @app.route("/", methods=["GET"])

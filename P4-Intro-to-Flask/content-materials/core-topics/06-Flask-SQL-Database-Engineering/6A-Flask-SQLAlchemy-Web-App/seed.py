@@ -1,5 +1,30 @@
+"""
+FILENAME:       `seed.py`
+TITLE:          Flask REST API integrated with SQLite3 and SQLAlchemy.
+AUTHOR:         Aakash 'Kash' Sudhakar
+DESCRIPTION:    A tutorial mini-project on setting up backend servers
+                that handle RESTful API calls via HTTP requests and store,
+                modify, and query data via tabular SQLite3 databases extended
+                with SQL-Alchemy for additional functionalities, validations,
+                security, and authentication. 
+USAGE:          Run with `python(3) seed.py` to reset and populate 
+                SQLAlchemy database with dummy data.
+"""
+
+
+################################################################################
+### IMPORTATIONS AND INITIALIZATIONS FOR DEVELOPING FLASK-SQLALCHEMY SERVERS ###
+################################################################################
+
+
 from app import app
 from models import db, Mob
+
+
+################################################################################
+################# DATABASE SEEDING AND REGENERATIVE POPULATION #################
+################################################################################
+
 
 print(">> Seeding... starting...")
 

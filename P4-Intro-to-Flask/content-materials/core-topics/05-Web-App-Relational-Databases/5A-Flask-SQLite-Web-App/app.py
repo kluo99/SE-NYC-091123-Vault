@@ -26,10 +26,6 @@ import utils
 ################################################################################
 
 
-# NOTE: For all API routes, you can use either `http://localhost` or 
-#       `http://AAA.B.C.D`, where the latter option's letters are replaced by 
-#       the actual IP address from which your application loads.
-
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -42,6 +38,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 # NOTE: For all API routes, you can use either `http://localhost` or 
 #       `http://AAA.B.C.D`, where the latter option's letters are replaced by 
 #       the actual IP address from which your application loads.
+
 
 # GET Request to Access Root of API.
 @app.route("/", methods=["GET"])
