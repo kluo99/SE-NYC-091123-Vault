@@ -40,3 +40,7 @@ migrations/
 */migrations/
 instance/
 */instance/
+
+# Starter Code Directories
+starter/
+*/starter/
