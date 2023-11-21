@@ -25,18 +25,24 @@ MOB_FEATURES = ["mob_id", "name", "hit_points", "damage", "speed", "is_hostile"]
 
 
 def connect_to_database():
+    # Connect to database.
     connection = sqlite3.connect("mobs.db")
     return connection
 
 def create_data_table():
     try:
+        # Connect to database.
         connection = connect_to_database()
 
+        # Create database query in SQL for deleting preexisting data.
         print(">> Dropping mob data...")
         TABLE_DELETION_QUERY = """DROP TABLE IF EXISTS mobs"""
+
+        # Execute database deletion query using SQL connection.
         connection.execute(TABLE_DELETION_QUERY)
         print(">> Mobs dataset dropped.")
 
+        # Create database query in SQL for manually creating new data.
         print(">> Creating new mobs table...")
         TABLE_CREATION_QUERY = """
             CREATE TABLE mobs (
@@ -48,12 +54,17 @@ def create_data_table():
                 is_hostile BOOLEAN NOT NULL
             );
         """
+
+        # Execute database population query using SQL connection.
         connection.execute(TABLE_CREATION_QUERY)
+
+        # Commit all executed queries to SQL database for migration.
         connection.commit()
         print(">> Mobs table created successfully.")
     except:
         print(">> Failed to create mobs table.")
     finally:
+        # Close connection to SQL database.
         connection.close()
 
 
@@ -131,14 +142,20 @@ def update_mob(mob_id: int, new_mob_info: dict):
             UPDATE mobs SET name = ?, hit_points = ?, damage = ?, speed = ?, is_hostile = ? 
             WHERE mob_id = ?
         """
+
+
         UPDATE_DATA = []
+
         for key in MOB_FEATURES:
             if key != "mob_id":
                 if key in new_mob_info:
                     UPDATE_DATA.append(new_mob_info[key])
                 else:
                     UPDATE_DATA.append(original_mob[key])
+
         UPDATE_DATA = tuple(UPDATE_DATA) + (mob_id,)
+
+
         cursor.execute(UPDATE_QUERY, UPDATE_DATA)
 
         connection.commit()
