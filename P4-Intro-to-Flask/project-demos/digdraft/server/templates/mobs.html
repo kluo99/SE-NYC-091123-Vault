@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title">{% block title %} Mobs {% endblock %}</h1>
+    <div class="content">
+        {% for mob in spawnable_mobs %}
+        <break>
+            <div class="mob">
+
+                <p><b>#{{ mob.id }}. {{ mob.name }}</b></p>
+                <ul>
+                    <li>HP: {{ mob.hit_points }}</li>
+
+                    <li>DMG: {{ mob.damage }}</li>
+
+                    <li>SPD: {{ mob.speed }}</li>
+
+                    {% if mob.is_hostile == true %}
+                    <li><i>Currently aggressive!</i></li>
+                    {% else %}
+                    <li>Currently passive.</li>
+                    {% endif %}
+
+                    {% if mob.can_spawn_during_daytime == true %}
+                    <li><i>• Spawnable all day.</i></li>
+                    {% else %}
+                    <li>Only spawns at night.</li>
+                    {% endif %}
+                </ul>
+            </div>
+        <break>
+        {% endfor %}
+    </div>
+{% endblock %}
