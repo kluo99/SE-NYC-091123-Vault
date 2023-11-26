@@ -22,17 +22,12 @@ from middleware import authorization_required
 # GET route to access database.
 @app.route("/")
 def app_root():
-    return {"msg": "Welcome to Digdraft! Please log in or create an account to continue."}
+    return {"msg": "Welcome to Digdraft!", "notice": "Please log in or create an account to continue."}
 
 # GET route to access API entry point.
 @app.route("/api")
 @authorization_required
 def api_entry(current_player):
-    # player_authorization = authorize_player()
-    # if current_player.status_code == 401:
-    #     return make_response({"error": current_player.get_json()["error"]}, 401)
-    # else:
-    #     return make_response({"msg": "Successful API access."}, 200)
     return make_response({"player_id": current_player["id"], "msg": "Successful API access."}, 200)
 
 
