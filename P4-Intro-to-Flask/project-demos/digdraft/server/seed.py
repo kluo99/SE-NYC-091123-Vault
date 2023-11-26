@@ -3,16 +3,36 @@
 #######################################################
 
 
-# Database instance, both physical models, and the associator.
-from models import db, Mob, Biome, Spawn
-# Flask application connection.
-from app import app
+# Get database instance and Flask application connection.
+from config import db, app
+# Get all physical models and the associator.
+from models import Player, Mob, Biome, Spawn
+# Cryptographic hashing utilities for passwords.
+import bcrypt
 
 
 #######################################################
 ########### DEFINING DATA SEEDING FUNCTIONS ###########
 #######################################################
 
+
+# Helper function to curate ten (10) sample players with access to API.
+def create_sample_players():
+    def encrypt_password(password):
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(password.encode("utf-8"), salt=salt)
+        return hashed_password.decode("utf-8")
+    player_1 = Player(username="DJProfessorKash", password=encrypt_password("f4ket34ch3r"), kills=8, deaths=4, experience=15)
+    player_2 = Player(username="SakibRasul", password=encrypt_password("il0v3r34ct4ndr0ll"), kills=7, deaths=2, experience=25)
+    player_3 = Player(username="TimTheTerrible", password=encrypt_password("l33tg4m3r"), kills=80, deaths=2, experience=75)
+    player_4 = Player(username="SuperMarioBro", password=encrypt_password("pr1nc3ssp34ch"), kills=720, deaths=1, experience=9001)
+    player_5 = Player(username="JSONPhillips", password=encrypt_password("n0tj4s0nv00rh33s"), kills=42, deaths=12, experience=30)
+    player_6 = Player(username="TheOnlyRealGamer", password=encrypt_password("c4llm3s0ph13"), kills=3, deaths=4, experience=56)
+    player_7 = Player(username="Merrgan123", password=encrypt_password("g4m3f1r3"), kills=45, deaths=11, experience=45)
+    player_8 = Player(username="OneOfTheAndrews", password=encrypt_password("blum3nth4ln0tschw4rtz"), kills=88, deaths=44, experience=22)
+    player_9 = Player(username="Miguel1671", password=encrypt_password("c00kins0m3th1ngup"), kills=0, deaths=1, experience=71)
+    player_10 = Player(username="OG_Sean", password=encrypt_password("4ctu4llyjustst3v3"), kills=101, deaths=33, experience=234)
+    return [player_1, player_2, player_3, player_4, player_5, player_6, player_7, player_8, player_9, player_10]
 
 # Helper function to curate ten (10) sample mobs.
 def create_sample_mobs():
@@ -65,11 +85,18 @@ with app.app_context():
     print(">> Seeding data...")
 
     print("\n\t>> Deleting preexisting table data...")
+    Player.query.delete()
     Mob.query.delete()
     Biome.query.delete()
     Spawn.query.delete()
     db.session.commit()
     print("\t>> Data deletion successful.")
+
+    print("\n\t>> Generating sample data for players with cryptographic hashing...")
+    sample_players = create_sample_players()
+    db.session.add_all(sample_players)
+    db.session.commit()
+    print("\t>> Player data generation successful.")
 
     print("\n\t>> Generating sample data for mobs...")
     sample_mobs = create_sample_mobs()

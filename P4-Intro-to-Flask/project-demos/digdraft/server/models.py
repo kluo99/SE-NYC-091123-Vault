@@ -3,30 +3,11 @@
 #######################################################
 
 
-from sqlalchemy_serializer import SerializerMixin
+from config import db
+
 from sqlalchemy.orm import validates
-from sqlalchemy import MetaData
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
-
-
-#######################################################
-########## SETTING UP DATABASE CONFIGURATION ##########
-#######################################################
-
-
-convention = {
-    "ix": "ix_%(column_0_label)s",
-    "uq": "uq_%(table_name)s_%(column_0_name)s",
-    "ck": "ck_%(table_name)s_%(constraint_name)s",
-    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-    "pk": "pk_%(table_name)s",
-}
-
-metadata = MetaData(naming_convention=convention)
-
-# Instantiate database connection using metadata schema.
-db = SQLAlchemy(metadata=metadata)
 
 
 #######################################################
@@ -148,3 +129,15 @@ class Spawn(db.Model, SerializerMixin):
     # 3c. Creates serialization rules to avoid cascading when accessing spawn data from a mob.
     # 3d. Creates serialization rules to avoid cascading when accessing spawn data from a biome.
     serialize_rules = ("-mob.spawns", "-biome.spawns")
+
+
+class Player(db.Model, SerializerMixin):
+    __tablename__ = "player_table"
+
+    id = db.Column(db.Integer, primary_key=True)
+    kills = db.Column(db.Integer, default=0, nullable=False)
+    deaths = db.Column(db.Integer, default=0, nullable=False)
+    experience = db.Column(db.Integer, default=1, nullable=False)
+    username = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())

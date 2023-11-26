@@ -3,16 +3,13 @@
 #######################################################
 
 
-from flask import make_response, jsonify, request, render_template
-from flask import Flask
-from models import db, Mob, Biome, Spawn
+from flask import make_response, jsonify, request, session
+# from flask import render_template
+import bcrypt
 
-from flask_migrate import Migrate
+from config import app, db
 
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///digdraft.db"
-migrate = Migrate(app, db)
-db.init_app(app)
+from models import Player, Mob, Biome, Spawn
 
 
 #######################################################
@@ -24,12 +21,15 @@ db.init_app(app)
 @app.route("/")
 def app_root():
     return {"msg": "Welcome to Digdraft!"}
-    return render_template("index.html")
 
 # GET route to access API entry point.
 @app.route("/api")
 def api_entry():
-    return {"msg": "Successful API access."}
+    player_authorization = authorize_player()
+    if player_authorization.status_code == 401:
+        return make_response({"error": player_authorization.get_json()["error"]}, 401)
+    else:
+        return make_response({"msg": "Successful API access."}, 200)
 
 
 #######################################################
@@ -42,7 +42,8 @@ def api_entry():
 def view_all_mobs():
     all_mobs = Mob.query.all()
     spawnable_mobs = [mob.to_dict(rules=("-spawns",)) for mob in all_mobs]
-    return render_template("mobs.html", spawnable_mobs=spawnable_mobs)
+    return make_response(spawnable_mobs, 200)
+    # return render_template("mobs.html", spawnable_mobs=spawnable_mobs)
 
 # GET route to access an individual mob by ID.
 @app.get("/api/mobs/<int:mob_id>")
@@ -237,6 +238,97 @@ def view_spawned_mobs_for_biome(biome_id: int):
     spawned_mobs_for_biome = [mob.to_dict(rules=("-spawns",)) for mob in matching_biome.mobs]
     return make_response(jsonify(spawned_mobs_for_biome), 200)
 
+
+#######################################################
+############ PLAYER AUTHENTICATION ROUTING ############
+#######################################################
+
+
+# POST route to create new user/player within database.
+@app.route("/signup", methods=["POST"])
+def add_player():
+    if request.method == "POST":
+        payload = request.get_json()
+
+        username = payload["username"]
+        password = payload["password"]
+
+        salt = bcrypt.gensalt()
+        hashed_password = bcrypt.hashpw(password.encode("utf-8"), salt=salt)
+
+        new_player = Player(
+            username=username,
+            password=hashed_password.decode("utf-8")
+        )
+
+        if new_player is not None:
+            db.session.add(new_player)
+            db.session.commit()
+            session["player_id"] = new_player.id
+            return make_response(
+                new_player.to_dict(only=("id", "kills", "deaths", "experience", "username", "created_at")), 
+                201
+            )
+        else:
+            return make_response({"error": "Invalid username or password. Try again."}, 401)
+    else:
+        return make_response({"error": f"Invalid request type. (Expected POST; received {request.method}.)"}, 400)
+    
+# POST route to authenticate player credentials.
+@app.route("/login", methods=["POST"])
+def player_login():
+    if request.method == "POST":
+        payload = request.get_json()
+
+        matching_player = Player.query.filter(Player.username.like(f"%{payload['username']}%")).first()
+
+        AUTHENTICATION_IS_SUCCESSFUL = bcrypt.checkpw(
+            password=payload["password"].encode("utf-8"),
+            hashed_password=matching_player.password.encode("utf-8")
+        )
+
+        if matching_player is not None and AUTHENTICATION_IS_SUCCESSFUL:
+            session["player_id"] = matching_player.id
+            return make_response(
+                matching_player.to_dict(only=("id", "kills", "deaths", "experience", "username", "created_at")), 
+                200
+            )
+        else:
+            return make_response({"error": "Invalid username or password. Try again."}, 401)
+    else:
+        return make_response({"error": f"Invalid request type. (Expected POST; received {request.method}.)"}, 400)
+    
+# DELETE route to clear player credentials from server session.
+@app.route("/logout", methods=["DELETE"])
+def player_logout():
+    if request.method == "DELETE":
+        session["player_id"] = None
+        return make_response({"msg": "Player successfully logged out."}, 204)
+    else:
+        return make_response({"error": f"Invalid request type. (Expected DELETE; received {request.method}.)"}, 400)
+
+
+#######################################################
+############# PLAYER AUTHORIZATION ROUTING ############
+#######################################################
+
+# GET route to authorize another view with existing player credentials.
+@app.route("/authorize", methods=["GET"])
+def authorize_player():
+    player_id = session.get("player_id")
+
+    if not player_id:
+        return make_response({"error": "Player account not authenticated. Please log in or sign up to continue using the application."}, 401)
+    else:
+        matching_player = Player.query.filter(Player.id == player_id).first()
+        if matching_player is not None:
+            return make_response(
+                matching_player.to_dict(only=("id", "username", "created_at")), 
+                200
+            )
+        else:
+            return make_response({"error": "Invalid username or password. Try again."}, 401)
+        
 
 #######################################################
 ############## ADDITIONAL ERROR HANDLING ##############
