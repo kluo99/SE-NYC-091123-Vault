@@ -11,6 +11,8 @@ from config import app, db
 
 from models import Player, Mob, Biome, Spawn
 
+from middleware import authorization_required
+
 
 #######################################################
 ######## INITIAL SETUP ROUTES FOR APPLICATION #########
@@ -20,16 +22,18 @@ from models import Player, Mob, Biome, Spawn
 # GET route to access database.
 @app.route("/")
 def app_root():
-    return {"msg": "Welcome to Digdraft!"}
+    return {"msg": "Welcome to Digdraft! Please log in or create an account to continue."}
 
 # GET route to access API entry point.
 @app.route("/api")
-def api_entry():
-    player_authorization = authorize_player()
-    if player_authorization.status_code == 401:
-        return make_response({"error": player_authorization.get_json()["error"]}, 401)
-    else:
-        return make_response({"msg": "Successful API access."}, 200)
+@authorization_required
+def api_entry(current_player):
+    # player_authorization = authorize_player()
+    # if current_player.status_code == 401:
+    #     return make_response({"error": current_player.get_json()["error"]}, 401)
+    # else:
+    #     return make_response({"msg": "Successful API access."}, 200)
+    return make_response({"player_id": current_player["id"], "msg": "Successful API access."}, 200)
 
 
 #######################################################
@@ -39,7 +43,8 @@ def api_entry():
 
 # GET route to access all mobs.
 @app.get("/api/mobs")
-def view_all_mobs():
+@authorization_required
+def view_all_mobs(current_player):
     all_mobs = Mob.query.all()
     spawnable_mobs = [mob.to_dict(rules=("-spawns",)) for mob in all_mobs]
     return make_response(spawnable_mobs, 200)
@@ -47,7 +52,8 @@ def view_all_mobs():
 
 # GET route to access an individual mob by ID.
 @app.get("/api/mobs/<int:mob_id>")
-def view_mob_by_id(mob_id: int):
+@authorization_required
+def view_mob_by_id(current_player, mob_id: int):
     matching_mob = Mob.query.filter(Mob.id == mob_id).first()
     if not matching_mob:
         return make_response(jsonify({"error": f"Mob ID `{mob_id}` not found in database."}), 404)
@@ -55,7 +61,8 @@ def view_mob_by_id(mob_id: int):
 
 # POST route to add new mob to database.
 @app.post("/api/mobs")
-def add_mob():
+@authorization_required
+def add_mob(current_player):
     POST_REQUEST = request.get_json()
     new_mob = Mob(
         name=POST_REQUEST["name"], 
@@ -71,7 +78,8 @@ def add_mob():
 
 # PATCH route to edit a mob's information in database.
 @app.patch("/api/mobs/<int:mob_id>")
-def edit_mob(mob_id: int):
+@authorization_required
+def edit_mob(current_player, mob_id: int):
     matching_mob = Mob.query.filter(Mob.id == mob_id).first()
     if not matching_mob:
         return make_response(jsonify({"error": f"Mob ID `{mob_id}` not found in database."}), 404)
@@ -84,7 +92,8 @@ def edit_mob(mob_id: int):
 
 # DELETE route to remove a mob from the database.
 @app.delete("/api/mobs/<int:mob_id>")
-def remove_mob(mob_id: int):
+@authorization_required
+def remove_mob(current_player, mob_id: int):
     matching_mob = Mob.query.filter(Mob.id == mob_id).first()
     if not matching_mob:
         return make_response(jsonify({"error": f"Mob ID `{mob_id}` not found in database."}), 404)
@@ -100,14 +109,16 @@ def remove_mob(mob_id: int):
 
 # GET route to access biomes.
 @app.get("/api/biomes")
-def view_all_biomes():
+@authorization_required
+def view_all_biomes(current_player):
     all_biomes = Biome.query.all()
     spawnable_biomes = [biome.to_dict(rules=("-spawns",)) for biome in all_biomes]
     return make_response(jsonify(spawnable_biomes), 200)
 
 # GET route to access an individual biome by ID.
 @app.get("/api/biomes/<int:biome_id>")
-def view_biome_by_id(biome_id: int):
+@authorization_required
+def view_biome_by_id(current_player, biome_id: int):
     matching_biome = Biome.query.filter(Biome.id == biome_id).first()
     if not matching_biome:
         return make_response(jsonify({"error": f"Biome ID `{biome_id}` not found in database."}), 404)
@@ -115,7 +126,8 @@ def view_biome_by_id(biome_id: int):
 
 # POST route to add new biome to database.
 @app.post("/api/biomes")
-def add_biome():
+@authorization_required
+def add_biome(current_player):
     POST_REQUEST = request.get_json()
     new_biome = Biome(
         name=POST_REQUEST["name"], 
@@ -131,7 +143,8 @@ def add_biome():
 
 # PATCH route to edit a biome's information in database.
 @app.patch("/api/biomes/<int:biome_id>")
-def edit_biome(biome_id: int):
+@authorization_required
+def edit_biome(current_player, biome_id: int):
     matching_biome = Biome.query.filter(Biome.id == biome_id).first()
     if not matching_biome:
         return make_response(jsonify({"error": f"Biome ID `{biome_id}` not found in database."}), 404)
@@ -144,7 +157,8 @@ def edit_biome(biome_id: int):
 
 # DELETE route to remove a biome from the database.
 @app.delete("/api/biomes/<int:biome_id>")
-def remove_biome(biome_id: int):
+@authorization_required
+def remove_biome(current_player, biome_id: int):
     matching_biome = Biome.query.filter(Biome.id == biome_id).first()
     if not matching_biome:
         return make_response(jsonify({"error": f"Biome ID `{biome_id}` not found in database."}), 404)
@@ -160,7 +174,8 @@ def remove_biome(biome_id: int):
 
 # POST route to add a biome to a mob's currently spawned biomes (list).
 @app.post("/api/mobs/<int:mob_id>/spawns")
-def spawn_mob_in_biome(mob_id: int):
+@authorization_required
+def spawn_mob_in_biome(current_player, mob_id: int):
     # 1. Find the mob that matches the given ID from the URL/route.
     matching_mob = Mob.query.filter(Mob.id == mob_id).first()
     # 2. Find the biome that matches the given ID from the request. 
@@ -188,7 +203,8 @@ def spawn_mob_in_biome(mob_id: int):
 
 # GET route to view all spawned biomes for a current mob.
 @app.get("/api/mobs/<int:mob_id>/biomes")
-def view_spawned_biomes_for_mob(mob_id: int):
+@authorization_required
+def view_spawned_biomes_for_mob(current_player, mob_id: int):
     matching_mob = Mob.query.filter(Mob.id == mob_id).first()
     if not matching_mob:
         return make_response(jsonify({"error": f"Mob ID `{mob_id}` not found in database."}), 404)
@@ -203,7 +219,8 @@ def view_spawned_biomes_for_mob(mob_id: int):
 
 # POST route to add a mob to a biome's currently spawned mobs (list).
 @app.post("/api/biomes/<int:biome_id>/spawns")
-def spawn_mob_from_biome(biome_id: int):
+@authorization_required
+def spawn_mob_from_biome(current_player, biome_id: int):
     # 1. Find the biome that matches the given ID from the URL/route.
     matching_biome = Biome.query.filter(Biome.id == biome_id).first()
     # 2. Find the mob that matches the given ID from the request. 
@@ -231,7 +248,8 @@ def spawn_mob_from_biome(biome_id: int):
 
 # GET route to view all spawned mobs for a current biome.
 @app.get("/api/biomes/<int:biome_id>/mobs")
-def view_spawned_mobs_for_biome(biome_id: int):
+@authorization_required
+def view_spawned_mobs_for_biome(current_player, biome_id: int):
     matching_biome = Biome.query.filter(Biome.id == biome_id).first()
     if not matching_biome:
         return make_response(jsonify({"error": f"Biome ID `{biome_id}` not found in database."}), 404)
@@ -245,7 +263,7 @@ def view_spawned_mobs_for_biome(biome_id: int):
 
 
 # POST route to create new user/player within database.
-@app.route("/signup", methods=["POST"])
+@app.route("/players", methods=["POST"])
 def add_player():
     if request.method == "POST":
         payload = request.get_json()
@@ -275,7 +293,7 @@ def add_player():
         return make_response({"error": f"Invalid request type. (Expected POST; received {request.method}.)"}, 400)
     
 # POST route to authenticate player credentials.
-@app.route("/login", methods=["POST"])
+@app.route("/players/login", methods=["POST"])
 def player_login():
     if request.method == "POST":
         payload = request.get_json()
@@ -299,7 +317,7 @@ def player_login():
         return make_response({"error": f"Invalid request type. (Expected POST; received {request.method}.)"}, 400)
     
 # DELETE route to clear player credentials from server session.
-@app.route("/logout", methods=["DELETE"])
+@app.route("/players/logout", methods=["DELETE"])
 def player_logout():
     if request.method == "DELETE":
         session["player_id"] = None
