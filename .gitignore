@@ -44,3 +44,7 @@ instance/
 # Starter Code Directories
 starter/
 */starter/
+
+# Environment Variables
+.env
+*/.env
