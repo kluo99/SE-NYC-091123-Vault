@@ -1,10 +1,23 @@
-from flask import make_response, session
+#######################################################
+############## IMPORTS AND INSTANTIATIONS #############
+#######################################################
 
+
+# Flask server request-response and session storage utilities.
+from flask import make_response, session
+# Configured application/server instance.
+from config import app
+# Relative access to user model.
+from models import User
+
+# Additional tools for extending decorator function logic.
 from functools import partial, wraps
 
-from config import app
 
-from models import User
+#######################################################
+###### EXPORTABLE MIDDLEWARE UTILITY FUNCTION(S) ######
+#######################################################
+
 
 def authorization_required(func=None, methods=["GET"]):
     if func is None:

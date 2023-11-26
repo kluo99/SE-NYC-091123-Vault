@@ -5,18 +5,15 @@
 
 # Flask server request-response and session storage utilities.
 from flask import request, make_response, session
+# Configured application/server and database instances.
+from config import app, db
+# Relative access to user and pet models.
+from models import User, Pet
+# Custom authorization decorator middleware.
+from middleware import authorization_required
 
 # Cryptographic hashing tools for user authentication.
 import bcrypt
-
-# Configured application/server and database instances.
-from config import app, db
-
-# Relative access to user and pet models.
-from models import User, Pet
-
-# Custom authorization decorator middleware.
-from middleware import authorization_required
 
 
 #######################################################
@@ -177,7 +174,7 @@ def user_logout():
         
 
 #######################################################
-############## ADDITIONAL ERROR HANDLING ##############
+################ GLOBAL ERROR HANDLING ################
 #######################################################
 
 
