@@ -1,8 +1,25 @@
+#######################################################
+############## IMPORTS AND INSTANTIATIONS #############
+#######################################################
+
+
+# Configured application/server and database instances.
 from config import db, app
+# Relative access to user model.
 from models import User
+
+# Cryptographic hashing tools for user authentication.
 import bcrypt
 
+
+#######################################################
+########## DEFINING DATA SEEDING FUNCTION(S) ##########
+#######################################################
+
+
+# Helper function to generate sample users using relevant object model.
 def create_users():
+    # Inner function to handle cryptographic hashing of passwords for safer database storage.
     def encrypt_password(password):
         salt = bcrypt.gensalt()
         hashed_password = bcrypt.hashpw(password.encode("utf-8"), salt=salt)
@@ -11,6 +28,12 @@ def create_users():
     user_2 = User(username="into_the_userverse", password=encrypt_password("drowssap"))
     user_3 = User(username="amazing_administrator", password=encrypt_password("abc123"))
     return [user_1, user_2, user_3]
+
+
+#######################################################
+#### DATABASE POPULATION WITHIN APPLIATION CONTEXT ####
+#######################################################
+
 
 with app.app_context():
     print(">> Seeding data...")

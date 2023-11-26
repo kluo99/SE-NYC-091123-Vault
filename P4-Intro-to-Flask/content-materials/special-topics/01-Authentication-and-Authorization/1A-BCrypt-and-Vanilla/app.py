@@ -1,14 +1,32 @@
+#######################################################
+############## IMPORTS AND INSTANTIATIONS #############
+#######################################################
+
+
+# Flask server request-response and session storage utilities.
 from flask import request, make_response, session
-import bcrypt
-
+# Configured application/server and database instances.
 from config import app, db
-
+# Relative access to user model.
 from models import User
 
+# Cryptographic hashing tools for user authentication.
+import bcrypt
+
+
+#######################################################
+######## INITIAL SETUP ROUTES FOR APPLICATION #########
+#######################################################
+
+
+# GET route to access homepage.
+# NOTE: No authentication required.
 @app.route("/")
 def root():
-    return make_response({"msg": "Application loaded successfully."}, 200)
+    return make_response({"msg": "Application loaded successfully.", "notice": "To enter the API, please log in or create an account."}, 200)
 
+# GET route to access API entrypoint.
+# NOTE: Requires user privileges.
 @app.route("/api")
 def api():
     authorization = authorize_user()
@@ -17,6 +35,13 @@ def api():
     else:
         return make_response({"msg": "API access granted.", "user": authorization.get_json()}, 200)
 
+
+#######################################################
+############# USER AUTHENTICATION ROUTING #############
+#######################################################
+
+
+# POST route to add new user to database.
 @app.route("/signup", methods=["POST"])
 def add_user():
     if request.method == "POST":
@@ -42,7 +67,8 @@ def add_user():
             return make_response({"error": "Invalid username or password. Try again."}, 401)
     else:
         return make_response({"error": f"Invalid request type. (Expected POST; received {request.method}.)"}, 400)
-    
+
+# POST route to authenticate user in database using session-stored credentials.
 @app.route("/login", methods=["POST"])
 def user_login():
     if request.method == "POST":
@@ -67,7 +93,8 @@ def user_login():
             return make_response({"error": "Invalid username or password. Try again."}, 401)
     else:
         return make_response({"error": f"Invalid request type. (Expected POST; received {request.method}.)"}, 400)
-    
+
+# DELETE route to remove session-stored credentials for logged user.
 @app.route("/logout", methods=["DELETE"])
 def user_logout():
     if request.method == "DELETE":
@@ -76,7 +103,14 @@ def user_logout():
         return make_response({"msg": "User successfully logged out."}, 204)
     else:
         return make_response({"error": f"Invalid request type. (Expected DELETE; received {request.method}.)"}, 400)
-    
+
+
+#######################################################
+############## USER AUTHORIZATION ROUTING #############
+#######################################################
+
+
+# GET route to grant post-login user authorization(s) across application routes.
 @app.route("/authorize")
 def authorize_user():
     user_id = session.get("user_id")
@@ -89,6 +123,23 @@ def authorize_user():
             return make_response(matching_user.to_dict(only=("id", "username", "created_at")), 200)
         else:
             return make_response({"error": "Invalid username or password. Try again."}, 401)
+        
+
+#######################################################
+################ GLOBAL ERROR HANDLING ################
+#######################################################
+
+
+# General GET route for 404 error handling.
+@app.errorhandler(404)
+def page_not_found(error):
+    return make_response({"error": "Page not found."}, 404)
+
+
+#######################################################
+######### FLASK BOILERPLATE FOR EXECUTION #############
+#######################################################
+        
         
 if __name__ == "__main__":
     app.run(debug=True, port=5555)
