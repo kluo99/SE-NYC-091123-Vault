@@ -49,4 +49,4 @@ CORS(app)
 # Load environment variables for additional application configuration.
 load_dotenv()
 # Configure application server with custom authentication token.
-app.config["SECRET_KEY"] = os.getenv("AUTHENTICATION_TOKEN")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
