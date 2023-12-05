@@ -29,19 +29,15 @@ Content in Phase 4 has been split into two major units: **core topical (primary)
 - [**CORE TOPICS #1: Reviewing Intermediate Patterns in Python**](content-materials/core-topics/01-Intermediate-Python-Patterns/Reviewing-Intermediate-Patterns-In-Python.ipynb)
 - [**CORE TOPICS #2: Introduction to Advanced Patterns in Python**](content-materials/core-topics/02-Advanced-Python-Patterns/Advanced-Patterns-In-Python.ipynb)
 - [**CORE TOPICS #3: Flask for Basic Server Development**](content-materials/core-topics/03-Basic-Server-Development/)
-- [**CORE TOPICS #4: RESTful API Design and Development**](content-materials/core-topics/04-RESTful-API-Development/)
-- [**CORE TOPICS #5: Developing Web Apps with Relational Databases**](content-materials/core-topics/05-Web-App-Relational-Databases/)
+- [**CORE TOPICS #4: RESTful API Design and Development**](content-materials/core-topics/04-REST-API-Development/)
+- [**CORE TOPICS #5: Developing Web Apps with Relational Databases**](content-materials/core-topics/05-Web-App-Tabular-Databases/)
 - [**CORE TOPICS #6: Flask and SQL for Database Engineering**](content-materials/core-topics/06-Flask-SQL-Database-Engineering/)
-- ~~**CORE TOPICS #7: Full-Stack Web Apps and Client-Server Communication**~~ _(In Development.)_
-- ~~**CORE TOPICS #8: Full-Stack Microservice Development**~~ _(In Development.)_
+- [**CORE TOPICS #7: Relational Database APIs with Flask-SQLAlchemy**](content-materials/core-topics/07-Relational-Database-APIs/)
+- [**CORE TOPICS #8: Session-Driven Authentication and Authorization**](content-materials/core-topics/08-Authentication-and-Authorization/)
 
 ## Subsidiary Resources for Phase 4 📚
 
 - ~~**SPECIAL TOPICS #1: Routing, Views, and Blueprints**~~ _(In Development.)_
-- ~~**SPECIAL TOPICS #2: Basic Authentication and Session Management**~~ _(In Development.)_
-- ~~**SPECIAL TOPICS #3: Unit Testing for Substack TDD**~~ _(In Development.)_
-- ~~**SPECIAL TOPICS #4: Integration Testing for Full-Stack TDD**~~ _(In Development.)_
-- ~~**SPECIAL TOPICS #5: Basic Options for Application Deployment**~~ _(In Development.)_
 
 ## Recommended Learning Resources
 
