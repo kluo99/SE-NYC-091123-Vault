@@ -21,7 +21,7 @@ class Coffee:
 
     def access_current_transactions(self, new_transaction=None):
         from classes.transaction import Transaction
-        if isinstance(new_transaction, Transaction):
+        if new_transaction and isinstance(new_transaction, Transaction):
             self.transactions.append(new_transaction)
         return self.transactions
 
@@ -30,7 +30,7 @@ class Coffee:
         from classes.customer import Customer
         if isinstance(new_customer, Customer) and new_customer not in self.customers:
             self.customers.append(new_customer)
-        return self.customers
+        return list(self.customers)
 
     def calculate_total_number_of_transactions(self):
         return len(self.transactions)
@@ -39,4 +39,4 @@ class Coffee:
         total_price = 0
         for transaction in self.transactions:
             total_price += transaction.price
-        return total_price / self.calculate_average_price_across_all_transactions()
+        return total_price / self.calculate_total_number_of_transactions()

@@ -90,9 +90,9 @@ class TestCustomer:
         ''' Tests that a customer can place an order/transaction using a string name and numerical price. '''
         coffee = Coffee("Espresso")
         customer = Customer('Steve')
-        transaction = customer.place_order("Espresso", 3)
-        assert (coffee in customer.access_current_coffees())
-        assert (transaction.price == 3)
+        transactions = customer.place_order("Espresso", 3)
+        assert (transactions.coffee in customer.access_current_coffees())
+        assert (transactions.price == 3)
 
     def test_get_total_money(self):
         ''' Tests that a customer can add up prices across all transactions. '''

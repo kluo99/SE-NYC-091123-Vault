@@ -1,3 +1,4 @@
+from classes.customer import Customer
 class Transaction:
     counter, catalog = 0, []
 
@@ -12,7 +13,10 @@ class Transaction:
 
         coffee.access_current_transactions(self)
         coffee.access_current_customers(customer)
-        
+
+        customer.access_current_transactions(self)
+        customer.access_current_coffees(coffee)
+
     @property
     def price(self):
         return self._price
@@ -26,11 +30,10 @@ class Transaction:
     
     @property
     def customer(self):
-        return self._price
+        return self._customer
     
     @customer.setter
     def customer(self, customer):
-        from customer import Customer
         if isinstance(customer, Customer):
             self._customer = customer
         else:
@@ -42,7 +45,7 @@ class Transaction:
 
     @coffee.setter
     def coffee(self, coffee):
-        from coffee import Coffee
+        from classes.coffee import Coffee
         if isinstance(coffee, Coffee):
             self._coffee = coffee
         else:

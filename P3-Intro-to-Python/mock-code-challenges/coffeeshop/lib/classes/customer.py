@@ -10,7 +10,7 @@ class Customer:
 
     @name.setter
     def name(self, name: str):
-        if isinstance(name, str) and (1 <= len(name) <= 15):
+        if isinstance(name, str) and 1 <= len(name) <= 15:
             self._name = name
         else:
             raise Exception ('Must be a string')
@@ -20,7 +20,7 @@ class Customer:
 
     def access_current_transactions(self, new_transaction=None):
         from classes.transaction import Transaction
-        if isinstance(new_transaction, Transaction):
+        if new_transaction and isinstance(new_transaction, Transaction):
             self.transactions.append(new_transaction)
         return self.transactions
 
@@ -38,10 +38,12 @@ class Customer:
 
     def calculate_total_money_spent(self):
         return sum(transaction.price for transaction in self.transactions)
+        pass
     
     def retrieve_coffees_within_price_range(self, min_price=0, max_price=999):
         filtered_coffees = []
         for transaction in self.transactions:
-            if min_price <= transaction <= max_price:
+            if min_price <= transaction.price <= max_price:
                 filtered_coffees.append(transaction.coffee)
         return filtered_coffees
+        pass
